@@ -1,0 +1,170 @@
+* {
+    padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html, body{
+    height: 1000px;
+    width: 900px;
+    background-image: linear-gradient(45deg, rgb(71, 233, 255), rgb(255, 255, 133));
+    background-repeat: no-repeat;
+}
+
+.foto{
+    display: flex;
+    float: left;
+    margin: 50px;
+    height: 200px;
+    width: 200px;
+    border-radius: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-nome{
+    display: flex;
+    height: 250px;
+    margin-left: 300px;
+    align-items: center;
+    text-align: center;
+}
+.box{
+    height: 300px;
+    width: 900px;
+    border-radius: 100px;
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.nome{
+    font-size: large;
+}
+
+.infMe{
+    float: left;
+    margin-left: 25px;
+    margin-top: 20px;
+    margin-right: 500px;
+}
+
+.cerchio{
+    display: flex;
+    width: 260px;
+    height: 30px;
+    border: 1px solid transparent;
+    border-radius: 0 15px;
+    border-color: black;
+    align-items: center;
+}
+
+.barra{
+    float: left;
+    width: 1px;
+    height: 650px;
+    margin-left: -400px;
+    background: gray;
+}
+
+.titolo{
+    display: flex;
+    position: absolute;
+    height: 30px;
+    width: 350px;
+    margin-left: 400px;
+    margin-top: 15px;
+    align-items: center;
+    border-radius: 0 0 45px;
+    box-shadow: 0 3px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.extra{
+    position: absolute;
+    margin-left: 400px;
+    margin-top: 50px;
+}
+
+.hobby{
+    height: 100px;
+    width: 100px;
+    margin-top: 50px;
+    border-radius: 100%;
+    background-image: linear-gradient(135deg, rgb(247, 193, 131), rgb(224, 129, 4));
+    box-shadow: 0 3px 2px 1px rgba(0, 0, 0, 0.2);
+    animation: paleggio 2s infinite ease;
+}
+.hobby::after{
+    content: "";
+    display: flex;
+    position: absolute;
+    height: 55px;
+    width: 98px;
+    margin-top: 23px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    border-color: black;
+}
+.hobby::before{
+    content: "";
+    display: flex;
+    position: absolute;
+    margin-top: 50px;
+    height: 1px;
+    width: 100px;
+    background: black;
+}
+
+.caricamento{
+    position: relative;
+    margin-top: 40px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #9370db;
+    animation: rotazione 3s linear infinite;
+}
+.caricamento::before{
+    content: "";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #ba55d3;
+    animation: rotazione 2s linear infinite;
+}
+.caricamento::after{
+    content: "";
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #f0f;
+    animation: rotazione 1.5s linear infinite;
+}
+
+@keyframes paleggio{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-30px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotazione{
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}

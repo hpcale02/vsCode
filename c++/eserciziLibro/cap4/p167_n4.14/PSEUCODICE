@@ -1,0 +1,17 @@
+//Finché non viene inserito il valore sentinella
+    //chiedere il numero cliente
+    //inserire il numero cliente
+    //chiedere il bilancio iniziale
+    //inserire il bilancio iniziale
+    //chiedere gli aquisti totale
+    //inserire gli aquisti totale
+    //chiedere i crediti
+    //inserire i crediti
+    //chiedere il credito massimo
+    //inserire il credito massimo
+    //calcolare il nuovo bilancio
+
+    //se iul nuovo bilancio è maggiore del credito massimo
+        //stampare il credito massimo
+        //stampare il nuovo bilancio
+        //stampare che il nuovo bilancio ha superato i limiti

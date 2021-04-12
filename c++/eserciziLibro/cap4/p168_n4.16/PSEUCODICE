@@ -1,0 +1,14 @@
+
+Finché non viene inserito un valore sentinella
+    chiedere il numeor di ore di lavoro
+    inserire il numero di ore di lavoro 
+    chiedere lo salario per un'ora
+    inserire lo salario per un'ora
+    
+    vedere se il numero di ore è maggiore di 40
+        sottrere a ore 40 
+        aggiungere allo stipendio 40 per stipenido piu stipendio per ore e stipendio per ore per 0.5
+    altrimenti
+        stipendio = ore * stipendio
+
+    stampare lo stipendio ricevuto 

@@ -1,0 +1,11 @@
+inizializzare il contatore uguale a 
+inizializzare il piuGrande = 0;
+
+Finché il contatore è minore di 10
+    chiede di inserire il numero dei pezzi venduti
+    inserisci il numero dei pezzi venduti
+    se il numero dei pezzi è piu grande del variabile piuGrande
+        piuGrande diventa il numero dei pezzi
+    incrementare il contatore
+
+stampare il numero piu grande

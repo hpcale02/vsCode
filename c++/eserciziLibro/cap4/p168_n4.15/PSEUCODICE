@@ -1,0 +1,8 @@
+inizializzare il stipendio fisso
+
+finché non viene inserito un valore sentinella
+    chiedere di inserire soldi della vendita
+    inserire soldi della vendita
+    calcolare il 9% della vendita e aggiungerla allo stipendio
+    stampare lo stipendio che riceve il rappresentante
+

@@ -1,0 +1,16 @@
+//PSEUCODICE
+//1.
+//inizailizzare i variabili
+//inserire e visualizzare i dati di ogni pieno fiche non viene inserito un numero cantinella
+
+//2.
+//inizializzare il valore totaleMilgia
+
+//Finché non viene inserito il valore cantonella
+    //chiede di inserire le miglia percorsi di quel pieno
+    //inserisci le miglia percorsi
+    //chiede di inserire i galloni usati per quel pieno
+    //inserisci i galloni usati
+    //scrive il rapporto miglia/galloni del pieno
+    //aggingi alle miglia totali le migia di questo tragitto
+    //scrivi il rapporto totaleMiglia/galloni
