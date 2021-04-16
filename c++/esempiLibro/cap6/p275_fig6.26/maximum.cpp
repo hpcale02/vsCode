@@ -23,6 +23,6 @@ int main()
     cout << "Input 3 char value: ";
     cin >> char1 >> char2 >> char3;
     cout << "the maximum char value is: " << maximum(char1, char2, char3) << endl;
-
+    
     return 0;
 }
