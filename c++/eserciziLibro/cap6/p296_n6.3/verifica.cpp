@@ -23,7 +23,7 @@ int main()
 
     //floor(x) ==> arrotondare x al più grande numero nono maggiore di x
     cout << "floor(9.2): " << floor(9.2) << endl;
-    cout << "floor(-9.8: " << floor(-9.8) << endl;
+    cout << "floor(-9.8): " << floor(-9.8) << endl;
 
     //fmod(x, y) ==> resto di x/y (valore a virgola mobile)
     cout << "fmod(2.5, 1.2): " << fmod(2.5, 1.2) << endl;
