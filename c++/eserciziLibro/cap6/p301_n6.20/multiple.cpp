@@ -12,7 +12,7 @@ int main()
     int num1, num2;
     cout << "inseirisci due numeri interi (per determinare se il secondo è multipo del primo): ";
     cin >> num1 >> num2;
-    if (multiple(num1, num2) == 0)
+    if (multiple(num1, num2) == 1)
         cout << "false" << endl;
     else
         cout << "true" << endl;
@@ -21,5 +21,5 @@ int main()
 
 bool multiple(int n1, int n2)
 {
-    return n2 % n1 == 0;
+    return n2 % n1;
 }
