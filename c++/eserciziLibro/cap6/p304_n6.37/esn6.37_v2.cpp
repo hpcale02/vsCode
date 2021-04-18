@@ -1,4 +1,5 @@
-//modificare l'es 6.35 con piu commenti per risposte giuste e sbagliate
+//aggiornare il programma 3.36 contando le giuste e errate
+//se le risposte correte sono minjore di 75% allora stampare Chiedete unm aiutpo al vostro professore
 //hpc 18.04.2021
 
 #include <iostream>
@@ -10,6 +11,9 @@ int main()
     int num1, num2, risposta;
     char ch;
     int nCommento;
+    int coretta = 0;
+    int sbagliata = 0;
+    int tot = 0;
 
     while (ch != 'n')
     {
@@ -20,11 +24,9 @@ int main()
 
         cout << "quanto fa " << num1 << " per " << num2 << " ?" << endl;
         cin >> risposta;
-
         while (risposta != num1 * num2)
         {
             nCommento = rand() % 4;
-
             switch (nCommento)
             {
             case 0:
@@ -41,11 +43,13 @@ int main()
                 break;
             }
 
+            sbagliata++;
+
             cin >> risposta;
         }
 
+        coretta++;
         nCommento = rand() % 4;
-
         switch (nCommento)
         {
         case 0:
@@ -65,6 +69,14 @@ int main()
         cout << "voi continuare? (y/n): ";
         cin >> ch;
     }
+
+    tot = coretta + sbagliata;
+    // x : 100 = coretta ： tot
+
+    if (coretta * 100 / tot < 75)
+        cout << "Chiedete un aiuto al vostro professore!" << endl;
+    else
+        cout << "sei bravissimo!" << endl;
 
     return 0;
 }
