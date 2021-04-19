@@ -18,8 +18,13 @@ int main()
 
 int mystery(int a, int b)
 {
-    if (b == 1)
+    if (b == 1 || b == -1)
         return a;
     else
-        return a + mystery(a, b - 1);
+    {
+        if (b > 0)
+            return a + mystery(a, b - 1);
+        else
+            return a + mystery(a, b + 1);
+    }
 }
