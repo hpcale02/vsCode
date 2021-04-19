@@ -6,27 +6,34 @@
 #include <iostream>
 using namespace std;
 
-void torreDiHanoi(int, int, int, int);
+void torreDiHanoi(int, char, char, char);
 
 int main()
 {
 
     int nDischi;
-    int pInit;
-    int pFine;
-    int pPause;
+    char pInit = 'A';
+    char pFine = 'C';
+    char pMedi = 'B';
 
-    cout << "inserisci i nuemri di dischi; ";
+    cout << "inserisci i nuemri di dischi: ";
     cin >> nDischi;
-    cout << "inserisci il paletto iniziale: ";
-    cin >> pInit;
-    cout << "insaerisci il paletto intermedio: ";
-    cin >> pPause;
-    cout << "inserisci il paletto finale: ";
-    cin >> pFine;
 
-    torreDiHanoi(nDischi, pInit, pFine, pPause);
-    
+    torreDiHanoi(nDischi, pInit, pFine, pMedi);
+
     return 0;
 }
 
+void torreDiHanoi(int nDischi, char initPal, char finePal, char mediumPal)
+{
+    if (nDischi == 1)
+    {
+        cout << initPal << " --> " << finePal << endl;
+    }
+    else
+    {
+        torreDiHanoi(nDischi - 1, initPal, mediumPal, finePal);
+        cout << initPal << " --> " << finePal << endl;
+        torreDiHanoi(nDischi - 1, mediumPal, finePal, initPal);
+    }
+}
