@@ -36,9 +36,32 @@ int main()
 {
     const int arraySize = 10;
     int arr[arraySize] = {23, 34, 21, 4, 12, 43, 66, 96, 1, 2};
+    int size = arraySize;
 
-    for (int i = 0; i < arraySize; i++)
+    for (int j = 0; j < arraySize; j++)
     {
+        int a = 0;
+        for (int i = 0; i < size; i++)
+        {
+            if ((arr[i] > 0) && (arr[i - 1] > arr[i]))
+            {
+                int sos = arr[i];
+                arr[i] = arr[i - 1];
+                arr[i - 1] = sos;
+                a++;
+            }
+        }
         
+        if (a == 0)
+            break;
+
+        for (int i = 0; i < arraySize; i++)
+        {
+            cout << arr[i] << "\t";
+        }
+        cout << endl;
+        size--;
     }
+
+    return 0;
 }
