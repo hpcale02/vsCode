@@ -36,8 +36,10 @@ const int verticale[8] = {-1, -2, -2, -1, 1, 2, 2, 1};
 
 int main()
 {
-    int rigaAttuale = 0;
-    int colonnaAttuale = 0;
+    int rigaAttuale;
+    int colonnaAttuale;
+    cout << "inserisci la posizione iniziale (8 x 8): ";
+    cin >> rigaAttuale >> colonnaAttuale;
 
     int moveNumber;
     int count = 2;
