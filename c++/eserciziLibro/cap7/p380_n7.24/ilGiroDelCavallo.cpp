@@ -15,29 +15,26 @@
 //verificare se il cavallo ha gia toccato quella casella
 //evitare di fare andare il cavallo fuori dalla scaccchiera
 
+//v2. fare una tabella di accessibilità e andaer semre in quella casella con accessibilità minore
+
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
 int displayMessage();
 void stampaScacchiera();
+void calcolaEuristica();
+void stampaEuristica();
+void azerrareEuristica();
 
-int board[8][8] = {0};
-ont accessibility[8][8] = {{2, 3, 4, 4, 4, 4, 3, 2},
-                           {3, 4, 6, 6, 6, 6, 4, 3},
-                           {4, 6, 8, 8, 8, 8, 6, 4},
-                           {4, 6, 8, 8, 8, 8, 6, 4},
-                           {4, 6, 8, 8, 8, 8, 6, 4},
-                           {4, 6, 8, 8, 8, 8, 6, 4},
-                           {3, 4, 6, 6, 6, 6, 4, 3},
-                           {2, 3, 4, 4, 4, 4, 3, 2}};
+int board[8][8] = {1};
+int accessibility[8][8] = {0};
+
+const int orizontale[8] = {2, 1, -1, -2, -2, -1, 1, 2};
+const int verticale[8] = {-1, -2, -2, -1, 1, 2, 2, 1};
 
 int main()
 {
-
-    int orizontale[8] = {2, 1, -1, -2, -2, -1, 1, 2};
-    int verticale[8] = {-1, -2, -2, -1, 1, 2, 2, 1};
-
     int rigaAttuale = 0;
     int colonnaAttuale = 0;
 
@@ -46,10 +43,15 @@ int main()
 
     board[rigaAttuale][colonnaAttuale] = 1;
 
-    while (count != 64)
+    while (count <= 64)
     {
+        calcolaEuristica();
+        stampaEuristica();
+        azerrareEuristica();
+
         do
         {
+
             moveNumber = displayMessage();
             rigaAttuale += verticale[moveNumber];
             colonnaAttuale += orizontale[moveNumber];
@@ -69,6 +71,7 @@ int main()
         stampaScacchiera();
     }
 
+    cout << "FINE!" << endl;
     return 0;
 }
 
@@ -94,4 +97,53 @@ void stampaScacchiera()
         cout << endl;
     }
     cout << endl;
+}
+
+void calcolaEuristica()
+{
+
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            for (int k = 0; k < 8; k++)
+            {
+                int x = j;
+                int y = i;
+                y += verticale[k];
+                x += orizontale[k];
+
+                if (x >= 0 && x < 8 && y < 8 && y >= 0 && board[y][x] == 0)
+                    accessibility[i][j]++;
+                else if (x >= 0 && x < 8 && y < 8 && y >= 0 && board[y][x] == 1)
+                    accessibility[i][j]--;
+            }
+        }
+    }
+}
+
+void stampaEuristica()
+{
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (board[i][j] != 0)
+                accessibility[i][j] = 0;
+
+            cout << setw(3) << accessibility[i][j];
+        }
+        cout << endl;
+    }
+}
+
+void azerrareEuristica()
+{
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            accessibility[i][j] = 0;
+        }
+    }
 }
