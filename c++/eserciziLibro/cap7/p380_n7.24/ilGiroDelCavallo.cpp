@@ -14,18 +14,19 @@
 //lultimo casella toccata dal cavallo = numero del contatore attuale
 //verificare se il cavallo ha gia toccato quella casella
 //evitare di fare andare il cavallo fuori dalla scaccchiera
-
 //v2. fare una tabella di accessibilità e andaer semre in quella casella con accessibilità minore
+//v3 automatica
 
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
-int displayMessage();
+void displayMessage();
 void stampaScacchiera();
 void calcolaEuristica();
 void stampaEuristica();
 void azerrareEuristica();
+int calcolaMove(int, int);
 
 int board[8][8] = {1};
 int accessibility[8][8] = {0};
@@ -45,25 +46,23 @@ int main()
 
     while (count <= 64)
     {
+        displayMessage();
         calcolaEuristica();
         stampaEuristica();
+        moveNumber = calcolaMove(rigaAttuale, colonnaAttuale);
+        cout << "move: " << moveNumber << endl;
         azerrareEuristica();
 
-        do
+        rigaAttuale += verticale[moveNumber];
+        colonnaAttuale += orizontale[moveNumber];
+
+        if (board[rigaAttuale][colonnaAttuale] != 0)
         {
-
-            moveNumber = displayMessage();
-            rigaAttuale += verticale[moveNumber];
-            colonnaAttuale += orizontale[moveNumber];
-
-            if (board[rigaAttuale][colonnaAttuale] != 0)
-            {
-                rigaAttuale -= verticale[moveNumber];
-                colonnaAttuale -= orizontale[moveNumber];
-                cout << "Casella già usata. Riprova.\n"
-                     << endl;
-            }
-        } while (board[rigaAttuale][colonnaAttuale] != 0);
+            rigaAttuale -= verticale[moveNumber];
+            colonnaAttuale -= orizontale[moveNumber];
+            cout << "Casella già usata. Riprova.\n"
+                 << endl;
+        }
 
         board[rigaAttuale][colonnaAttuale] = count;
         count++;
@@ -75,15 +74,29 @@ int main()
     return 0;
 }
 
-int displayMessage()
+int calcolaMove(int y, int x)
 {
-    int passo;
+    int min = 8;
+    int n = 0;
+    int Y, X;
+    for (int k = 0; k < 8; k++)
+    {
+        Y = y;
+        X = x;
+        Y += verticale[k];
+        X += orizontale[k];
+        if (Y >= 0 && X >= 0 && Y < 8 && X < 8 && accessibility[Y][X] < min && board[Y][X] == 0)
+        {
+            min = accessibility[Y][X];
+            n = k;
+        }
+    }
+    return n;
+}
 
+void displayMessage()
+{
     cout << "* 2 * 1 *\n3 * * * 0\n* * k * *\n4 * * * 7\n* 5 * 6 *" << endl;
-    cout << "inserisci passo: ";
-    cin >> passo;
-
-    return passo;
 }
 
 void stampaScacchiera()
