@@ -7,13 +7,15 @@
 using namespace std;
 
 void calcolaEuristica();
-bool calcolaDigonale1(int, int, bool);
-bool calcolaDigonale2(int, int, bool);
-bool calcolaRiga(int, int, bool);
-bool calcolaColonna(int, int, bool);
+void calcolaDigonale1(int, int);
+void calcolaDigonale2(int, int);
+void calcolaRiga(int, int);
+void calcolaColonna(int, int);
 void stampaEuristica();
 void stampaScacchiera();
 void azzerrrareEuristica();
+void calcolaScacchiera(int, int, int);
+void minimo(int &, int &);
 
 int scacchiera[8][8] = {0};
 int euristica[8][8] = {0};
@@ -29,18 +31,93 @@ int main()
         calcolaEuristica();
         stampaEuristica();
 
-        do
-        {
-            cout << "inserisci riga e cvolonna della regina che vuoi posizionare: ";
-            cin >> rigaRegina >> colonnaRegina;
-        } while (euristica[rigaRegina][colonnaRegina] == 0);
+        // do
+        // {
+        //     cout << "inserisci riga e cvolonna della regina che vuoi posizionare: ";
+        //     cin >> rigaRegina >> colonnaRegina;
+        // } while (euristica[rigaRegina][colonnaRegina] == 0);
+        minimo(rigaRegina, colonnaRegina);
+        cout << "Riga: " << rigaRegina << "\ncolonna: " << colonnaRegina << endl;
 
-        scacchiera[rigaRegina][colonnaRegina] = i;
-
+        calcolaScacchiera(rigaRegina, colonnaRegina, i);
         stampaScacchiera();
     }
 
     return 0;
+}
+
+void minimo(int &miny, int &minx)
+{
+    int min = 24;
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (euristica[i][j] < min && scacchiera[i][j] == 0)
+            {
+                min = euristica[i][j];
+                miny = i;
+                minx = j;
+            }
+        }
+    }
+}
+
+void calcolaScacchiera(int rigaRegina, int colonnaRegina, int i)
+{
+    int x, y;
+
+    //riga
+    for (int j = 0; j < 8; j++)
+    {
+        scacchiera[rigaRegina][j] = i;
+    }
+
+    //colonna
+    for (int j = 0; j < 8; j++)
+    {
+        scacchiera[j][colonnaRegina] = i;
+    }
+
+    //diagonale1.basso
+    y = rigaRegina + 1;
+    x = colonnaRegina + 1;
+    do
+    {
+        scacchiera[y][x] = i;
+        y++;
+        x++;
+    } while (y < 8 && x < 8);
+
+    //diagonale1.alto
+    y = rigaRegina - 1;
+    x = colonnaRegina - 1;
+    do
+    {
+        scacchiera[y][x] = i;
+        y--;
+        x--;
+    } while (y >= 0 && x >= 0);
+
+    //diagonale2.basso
+    y = rigaRegina + 1;
+    x = colonnaRegina - 1;
+    do
+    {
+        scacchiera[y][x] = i;
+        y++;
+        x--;
+    } while (y < 8 && x >= 0);
+
+    //diagonale2.alto
+    y = rigaRegina - 1;
+    x = colonnaRegina + 1;
+    do
+    {
+        scacchiera[y][x] = i;
+        y--;
+        x++;
+    } while (y >= 0 && x < 8);
 }
 
 void azzerrrareEuristica()
@@ -60,14 +137,10 @@ void calcolaEuristica()
     {
         for (int j = 0; j < 8; j++)
         {
-            bool casellaAccessibile = true;
-            casellaAccessibile = calcolaDigonale1(i, j, casellaAccessibile);
-            casellaAccessibile = calcolaDigonale2(i, j, casellaAccessibile);
-            casellaAccessibile = calcolaRiga(i, j, casellaAccessibile);
-            casellaAccessibile = calcolaColonna(i, j, casellaAccessibile);
-            euristica[i][j] -= 1;
-            if (!casellaAccessibile)
-                euristica[i][j] = 0;
+            calcolaDigonale1(i, j);
+            calcolaDigonale2(i, j);
+            calcolaRiga(i, j);
+            calcolaColonna(i, j);
         }
     }
 }
@@ -97,7 +170,7 @@ void stampaEuristica()
     }
 }
 
-bool calcolaDigonale1(int riga, int colonna, bool accessibile)
+void calcolaDigonale1(int riga, int colonna)
 {
     int i = riga + 1;
     int j = colonna + 1;
@@ -106,14 +179,10 @@ bool calcolaDigonale1(int riga, int colonna, bool accessibile)
         if (scacchiera[i][j] == 0)
         {
             euristica[riga][colonna]++;
-            i++;
-            j++;
         }
-        else
-        {
-            accessibile = false;
-            break;
-        }
+
+        i++;
+        j++;
     }
 
     i = riga - 1;
@@ -123,19 +192,14 @@ bool calcolaDigonale1(int riga, int colonna, bool accessibile)
         if (scacchiera[i][j] == 0)
         {
             euristica[riga][colonna]++;
-            i--;
-            j--;
         }
-        else
-        {
-            accessibile = false;
-            break;
-        }
+
+        i--;
+        j--;
     }
-    return accessibile;
 }
 
-bool calcolaDigonale2(int riga, int colonna, bool accessibile)
+void calcolaDigonale2(int riga, int colonna)
 {
     int i = riga - 1;
     int j = colonna + 1;
@@ -144,14 +208,10 @@ bool calcolaDigonale2(int riga, int colonna, bool accessibile)
         if (scacchiera[i][j] == 0)
         {
             euristica[riga][colonna]++;
-            i--;
-            j++;
         }
-        else
-        {
-            accessibile = false;
-            break;
-        }
+
+        i--;
+        j++;
     }
 
     i = riga + 1;
@@ -161,44 +221,27 @@ bool calcolaDigonale2(int riga, int colonna, bool accessibile)
         if (scacchiera[i][j] == 0)
         {
             euristica[riga][colonna]++;
-            j--;
-            i++;
         }
-        else
-        {
-            accessibile = false;
-            break;
-        }
+
+        j--;
+        i++;
     }
-    return accessibile;
 }
 
-bool calcolaRiga(int riga, int colonna, bool accessibile)
+void calcolaRiga(int riga, int colonna)
 {
     for (int i = 0; i < 8; i++)
     {
         if (scacchiera[riga][i] == 0)
             euristica[riga][colonna]++;
-        else
-        {
-            accessibile = false;
-            break;
-        }
     }
-    return accessibile;
 }
 
-bool calcolaColonna(int riga, int colonna, bool accessibile)
+void calcolaColonna(int riga, int colonna)
 {
     for (int i = 0; i < 8; i++)
     {
         if (scacchiera[i][colonna] == 0)
             euristica[riga][colonna]++;
-        else
-        {
-            accessibile = false;
-            break;
-        }
     }
-    return accessibile;
 }
