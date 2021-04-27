@@ -16,7 +16,7 @@ void bucketSort(int[], const int);
 int main()
 {
     const int arrSize = 5;
-    int arr[arrSize] = {100, 48, 28, 43, 65};
+    int arr[arrSize] = {1003, 4805, 2805, 4304, 6545};
     bucketSort(arr, arrSize);
 
     for (int i = 0; i < arrSize; i++)
@@ -33,6 +33,7 @@ void bucketSort(int arr[], const int n)
     const int riga = 10;
     int bucket[riga][n];
 
+    //far diventare la matrice tutti -1
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < n; j++)
@@ -41,26 +42,27 @@ void bucketSort(int arr[], const int n)
         }
     }
 
-    int div = 10;
+    int div = 1;
     int count = 0;
 
     do
     {
         int a = 0;
 
+        //assegnare arr[] a bucket[][]
         for (int i = 0; i < 10; i++)
         {
             for (int j = 0; j < n; j++)
             {
-                if ((arr[j] / (div / 10)) % div == i)
+                if ((arr[j] / div) % 10 == i)
                 {
-                    cout << bucket[i][j] << " " << arr[j] << endl;
                     bucket[i][j] = arr[j];
                     cout << bucket[i][j] << " " << arr[j] << endl;
                 }
             }
         }
 
+        //ridare i valori del bucket[][] a arr[]
         for (int i = 0; i < 10; i++)
         {
             for (int j = 0; j < n; j++)
@@ -70,7 +72,7 @@ void bucketSort(int arr[], const int n)
                     cout << bucket[i][j] << " " << arr[a] << endl;
                     arr[a] = bucket[i][j];
                     bucket[i][j] = -1;
-                    cout << bucket[i][j] << " " << arr[a] << endl;
+                    cout << arr[a] << endl;
                     a++;
                 }
             }
@@ -79,5 +81,5 @@ void bucketSort(int arr[], const int n)
         count++;
         div *= 10;
 
-    } while (count < 5);
+    } while (count < 4);
 }
