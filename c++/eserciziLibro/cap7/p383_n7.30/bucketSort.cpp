@@ -11,7 +11,9 @@
 #include <iomanip>
 using namespace std;
 
-void bucketSort(int[], int);
+void bucketSort(int[], const int);
+
+
 
 int main()
 {
@@ -27,9 +29,11 @@ int main()
     return 0;
 }
 
-void bucketSort(int arr[], int n)
+void bucketSort(int arr[], const int n)
 {
-    int bucket[10][n - 1];
+    const int riga = 10;
+    int bucket[riga][n];
+    
     int div = 10;
     int cont;
     int a = 0;
@@ -38,4 +42,8 @@ void bucketSort(int arr[], int n)
     {
         cont = arr[i] % div;
     }
+}
+
+void inizializzareArray(){
+
 }
