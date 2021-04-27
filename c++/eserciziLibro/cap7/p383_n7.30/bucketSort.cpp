@@ -13,14 +13,13 @@ using namespace std;
 
 void bucketSort(int[], const int);
 
-
-
 int main()
 {
-    int arr[5] = {100, 48, 28, 43, 65};
-    bucketSort(arr, 5);
+    const int arrSize = 5;
+    int arr[arrSize] = {100, 48, 28, 43, 65};
+    bucketSort(arr, arrSize);
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < arrSize; i++)
     {
         cout << setw(5) << arr[i];
     }
@@ -33,17 +32,52 @@ void bucketSort(int arr[], const int n)
 {
     const int riga = 10;
     int bucket[riga][n];
-    
-    int div = 10;
-    int cont;
-    int a = 0;
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < 10; i++)
     {
-        cont = arr[i] % div;
+        for (int j = 0; j < n; j++)
+        {
+            bucket[i][j] = -1;
+        }
     }
-}
 
-void inizializzareArray(){
+    int div = 10;
+    int count = 0;
 
+    do
+    {
+        int a = 0;
+
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if ((arr[j] / (div / 10)) % div == i)
+                {
+                    cout << bucket[i][j] << " " << arr[j] << endl;
+                    bucket[i][j] = arr[j];
+                    cout << bucket[i][j] << " " << arr[j] << endl;
+                }
+            }
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (bucket[i][j] != -1)
+                {
+                    cout << bucket[i][j] << " " << arr[a] << endl;
+                    arr[a] = bucket[i][j];
+                    bucket[i][j] = -1;
+                    cout << bucket[i][j] << " " << arr[a] << endl;
+                    a++;
+                }
+            }
+        }
+
+        count++;
+        div *= 10;
+
+    } while (count < 5);
 }
