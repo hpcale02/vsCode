@@ -13,7 +13,7 @@ void calcolaRiga(int, int);
 void calcolaColonna(int, int);
 void stampaEuristica();
 void stampaScacchiera();
-void azzerrrareEuristica();
+void azzerrareEuristica();
 void calcolaScacchiera(int, int, int);
 void minimo(int &, int &);
 
@@ -27,7 +27,7 @@ int main()
 
     for (int i = 1; i <= 8; i++)
     {
-        azzerrrareEuristica();
+        azzerrareEuristica();
         calcolaEuristica();
         stampaEuristica();
 
@@ -120,7 +120,7 @@ void calcolaScacchiera(int rigaRegina, int colonnaRegina, int i)
     } while (y >= 0 && x < 8);
 }
 
-void azzerrrareEuristica()
+void azzerrareEuristica()
 {
     for (int i = 0; i < 8; i++)
     {
