@@ -1,0 +1,16 @@
+Inizializzare l'array suit
+Inizializzare l'array face
+Inizializzare l'array deck
+    
+Per ognuna delle 52 carte
+    Scegliere una cella di deck in modo casuale
+
+    Finché la cella scelta è già stata selezionata prima
+        Scegliere una cella di deck in modo casuale
+    
+    Assegnare alla cella di deck scelta un numero d'ordine
+
+Per ognuna delle 52 carte
+    Per ogni cella dell'array deck
+        Se la cella contiene un numero d'ordinare
+            Visualizzare il valore e il seme della carta
