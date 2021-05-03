@@ -3,7 +3,8 @@
 
 #include "Poker.hpp"
 
-int main(){
+int main()
+{
     Poker poker;
 
     poker.mischiareCarte();
