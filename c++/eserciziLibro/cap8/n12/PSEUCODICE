@@ -1,0 +1,53 @@
+Determinare
+a)se c'è una coppia
+b)se c'è una doppia coppia
+c)se c'è un tiris di un certo tipo(es. tris di fanti)
+d)se c'è un poker di un certo tipo(es. 4 assi)
+e)se c'è un colore (tute le carte dello stesso seme)
+f)se c'è una scla (es. 12345)
+
+mischiare le carte e distribuirle a una mano di 5 carte e determinare i vari consizioni
+========================================================================================
+inizializzare il mazzo
+
+mischiare il mazzo
+
+distribuire le carte a mano di 5 carte
+
+determinare i vari condizioni
+========================================================================================
+Inizializzare il deck
+Inizializzare i segni
+Inizializzare i numeri
+Inizializzare il deckMano
+
+per ognuno delle 52 carte
+    Scegli una della posizione del deck casuale
+        
+        Finché la posizione del deck è occupata (!0)
+            Scegli una della posizione del deck casuale
+
+    Assegnare alla posizione del deck scelto un numero d'ordine
+
+per i primi 5 numeri dordine
+    assegnare a deck di mano il numeor e il segno della posizione del deck corrispondente
+
+Determinare i vari condizioni
+
+    se ci sono 2 carte con numeri uguali
+        ritornare true
+
+    se ci sono due coppie di 2 carte con numeri uguali
+        restiture true
+
+    se ci sono 3 carte con numeri uguali
+        restiture true
+    
+    se ci sono 4 carte con numeri uguali
+        restituire true
+
+    se le carte sono tutte di un segno 
+        restituire true
+    
+    se i numeri sono consecutivi 
+        restituire true
