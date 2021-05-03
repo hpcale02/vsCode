@@ -93,29 +93,38 @@ bool Poker::doppiaCoppia()
 {
     const int riga = 1;
     int coppia = 0;
+    int ricerca;
+    int k;
 
     for (int i = 0; i < 5; i++)
     {
-        int ricerca = deckMano[riga][i];
-        for (int j = i + 1; j < 5; j++)
+        if (coppia == 0)
         {
-            if (ricerca == deckMano[riga][j])
+            ricerca = deckMano[riga][i];
+            for (int j = i + 1; j < 5; j++)
             {
-                coppia = 1;
-                break;
+                if (ricerca == deckMano[riga][j])
+                {
+                    coppia = 1;
+                    k = ricerca;
+                    break;
+                }
             }
         }
 
         if (coppia == 1)
         {
             if (i < 4)
-                int ricerca = deckMano[riga][i + 1];
+            {
+                ricerca = deckMano[riga][i + 1];
+            }
+
             else
                 return false;
 
             for (int j = i + 1; j < 5; j++)
             {
-                if (ricerca == deckMano[riga][j])
+                if (ricerca == deckMano[riga][j + 1] && ricerca != k)
                     return true;
             }
         }
@@ -126,18 +135,18 @@ bool Poker::doppiaCoppia()
 bool Poker::tris()
 {
     const int riga = 1;
-    int i;
+    int count;
 
     for (int i = 0; i < 5; i++)
     {
         int ricerca = deckMano[riga][i];
-        i = 0;
+        count = 0;
         for (int j = i + 1; j < 5; j++)
         {
             if (ricerca == deckMano[riga][j])
             {
-                i++;
-                if (i == 2)
+                count++;
+                if (count == 2)
                     return true;
             }
         }
@@ -148,18 +157,18 @@ bool Poker::tris()
 bool Poker::pok()
 {
     const int riga = 1;
-    int i;
+    int count;
 
     for (int i = 0; i < 5; i++)
     {
         int ricerca = deckMano[riga][i];
-        i = 0;
+        count = 0;
         for (int j = i + 1; j < 5; j++)
         {
             if (ricerca == deckMano[riga][j])
             {
-                i++;
-                if (i == 3)
+                count++;
+                if (count == 3)
                     return true;
             }
         }
@@ -170,20 +179,20 @@ bool Poker::pok()
 bool Poker::colore()
 {
     const int riga = 0;
-    int i;
+    int count;
 
     for (int i = 0; i < 5; i++)
     {
 
         int ricerca = deckMano[riga][i];
-        i = 0;
+        count = 0;
 
         for (int j = i + 1; j < 5; j++)
         {
             if (ricerca == deckMano[riga][j])
             {
-                i++;
-                if (i == 4)
+                count++;
+                if (count == 4)
                     return true;
             }
         }
@@ -216,8 +225,34 @@ bool Poker::scala()
     return true;
 }
 
-void Poker::visualizzareMazzo(){
-    for(int i = 0; i < 5; i++){
+void Poker::visualizzareMazzo()
+{
+    int min;
+    int minIndex = 0;
+    int memoria[2];
+
+    for (int i = 0; i < 4; i++)
+    {
+        min = deckMano[1][i];
+        for (int j = i + 1; j < 5; j++)
+        {
+            if (deckMano[1][j] < min)
+            {
+                min = deckMano[1][j];
+                minIndex = j;
+            }
+        }
+
+        for (int k = 0; k < 2; k++)
+        {
+            memoria[k] = deckMano[k][i];
+            deckMano[k][i] = deckMano[k][minIndex];
+            deckMano[k][minIndex] = memoria[k];
+        }
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
         cout << numero[deckMano[1][i]] << " " << segno[deckMano[0][i]] << endl;
     }
 }
