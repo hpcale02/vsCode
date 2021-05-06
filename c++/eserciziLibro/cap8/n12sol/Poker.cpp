@@ -116,7 +116,7 @@ void tris(const int nDeck[][13], const int nMano[][2], const char *nFaccia[])
     int count[13] = {0};
 
     for (int i = 0; i < 5; i++)
-        count[nMano[i][1]];
+        count[nMano[i][1]]++;
 
     for (int i = 0; i < 13; i++)
         if (count[i] == 3)
@@ -169,6 +169,6 @@ void scala(const int nDeck[][13], const int nMano[][2], const char *nSeme[], con
         cout << "Scala:" << endl;
 
         for (int i = 0; i < 5; i++)
-            cout << nFaccia[nMano[i][1]] << " " << nSeme[nMano[i][0]] << endl;
+            cout << nFaccia[nMano[i][1]] << "of" << nSeme[nMano[i][0]] << endl;
     }
 }
