@@ -47,7 +47,6 @@ int main()
     int manoBot[5][2] = {0};
     int n;
 
-    
     cout << "numero partite: ";
     cin >> n;
 
@@ -129,8 +128,6 @@ void cambioCarteBot(const int nDeck[][6], const char *nFaccia[], const char *nSe
                             nMano[0][0] = i;
                             nMano[0][1] = j;
                         }
-
-            card++;
         }
         else if (pointPlay2 == 1)
         {
@@ -159,8 +156,6 @@ void cambioCarteBot(const int nDeck[][6], const char *nFaccia[], const char *nSe
                                 }
                         break;
                     }
-
-                card++;
             }
             else
                 cambio(nDeck, nMano);
@@ -282,6 +277,10 @@ void mescola(int nDeck[][6])
 {
     int row, column;
     card = 1;
+
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 6; j++)
+            nDeck[i][j] = 0;
 
     for (int i = 1; i <= 24; i++)
     {
