@@ -74,9 +74,9 @@ int main()
         cout << "Player:" << endl;
         visualizzareDeck(manoPlayer, faccia, seme);
         cout << "BOT:" << endl;
-        visualizzareDeck(manoBot, faccia, seme);
         valuta(manoBot, 2);
         cambioCarteBot(deck, faccia, seme, manoBot);
+        visualizzareDeck(manoBot, faccia, seme);
         valuta(manoBot, 2);
 
         /**************************CHI VINCE*******************************/
@@ -131,7 +131,7 @@ void cambioCarteBot(const int nDeck[][6], const char *nFaccia[], const char *nSe
         }
         else if (pointPlay2 == 1)
         {
-            if (nMano[4][1] - nMano[0][1] == 4)
+            if (nMano[4][1] - nMano[0][1] == 4 || nMano[4][1] - nMano[0][1] == 3)
             {
                 int index;
 
@@ -169,7 +169,6 @@ void cambioCarteBot(const int nDeck[][6], const char *nFaccia[], const char *nSe
 
         card++;
         valuta(nMano, 2);
-        visualizzareDeck(nMano, nFaccia, nSeme);
     }
 }
 
@@ -198,7 +197,6 @@ void cambio(const int nDeck[][6], int nMano[][2])
                         nMano[k][0] = i;
                         nMano[k][1] = j;
                     }
-    card++;
 }
 
 void valuta(const int nMano[][2], int player)
