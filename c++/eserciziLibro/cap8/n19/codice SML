@@ -1,3 +1,11 @@
+a).Utilizzino un ciclo controllato da un valore sentinella per leggere 10 valori positivi 
+e che necalcolino e visualizzino la somma.
+b).Utilizzino un ciclo controllato da un contatore 
+per leggere 7 numeri, alcuni positivi e altrinegativi, e calcolino e visualizzino la loro media.
+c).Leggano una serie di numeri per determinare e visualizzare il valore maggiore. Il primo numero 
+letto indica quanti sono i numeri da elaborare.
+
+
 +1007 //legge a
 +2007 //carica a
 +1008 //legge b
@@ -6,6 +14,49 @@
 +4002 //saltare al 02
 +2107 //memorizza numero caricato in a
 +1107 //stampa a
-+4300 //terminato
 
+
+1099 //legge contatore = 6
+1097 //==> 1
+1096 //==> 7
+1098 //legge a
+2098 //carica a
+1098 //legge b ==> metterlo alla memoria di a
+3098 //sommare memoria 98 al numero dentro accumulatore
+2198 //memorizza il numero nell accumulatore nella memoria 98
+2097 //carica 1
+3199 //sottrai al contatore 1
+4103 //se negativo andare alla memoria 03
+2096 //carica somma
+3298 //dividere la somma per 7
+
+
+int a, b, max;
+
+cin >> a;
+max = a;
+
+for（int i = 6; i < 0; i--){
+    cin >> b
+    if(b > max)
+        max = b;
+}
+
+cout << max;
+
+1099 //contatore 6   ==> 00
+1098 //1             ==> 01
+1097 //cin >> a      ==> 02
+2097 //carica a      ==> 03
+2196 //max = a       ==> 04
+1095 //cin >> b      ==> 05
+2096 //carica max    ==> 06
+3195 //b - max       ==> 07
+4110 //if b < max    ==> 08
+2196 //max = b       ==> 09
+2098 //carica 1      ==> 10
+3199 //contatore - 1 ==> 11
+4114 //contatore < 0 ==> 12
+4005 //andare a 05   ==> 13
+1196 //cout << max   ==> 14
 

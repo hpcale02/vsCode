@@ -35,12 +35,58 @@ using namespace std;
 #define BRANCHZERO 42; //saltare all'inidirizzo di memoria specificato se l'accumulatore vale 0
 #define HALT 43;       //Alt! il programma è terminato
 
+void start();
+void end();
+void erroriFatali();
+void dump();
+// read:Mostra una casella di input “Inserisci un numero intero”. Legge il valoreinserito,
+//      lo converte in un intero e lo memorizza nella posizione memory[operand ].
+// load:accumulator = memory[ operand ];
+// add:accumulator += memory[ operand ];
+// branch:Parleremo tra breve di questa istruzione.
+// halt:Visualizza il messaggio *** Esecuzione di Simpletron terminata ***
+
+//visualizzar gli registri e il dump di memoria
+
+void JTextField(int *countMemoriaPtr);
+
 int main()
 {
-    int memoria[100];
-    int accumulatore = 0000;
-    int codiceOperazione = 00;
-    int operando = 00;
+    int memory[100];
+    int accumulator = 0000;
+    int operationCode = 00; //prime due cifre
+    //operationCode = instructionRegister / 100;
+    int operand = 00; //ultime due cifre
+    //operand = instructionRegister % 100
+    int instructionCounter = 00; //indirizzo dell'istruzione successiva
+    //instructionRegister = memory[ instructionCounter ];
+    int instructionRegister = 0000; //da memoria a questo
 
-    
+    start();
+    end();
+}
+
+void start()
+{
+    cout << "*** Benvenuti in Simpletron! ***/n"
+         << "*** Digitate il vostro programma un’istruzione ***/n"
+         << "*** (o una parola di dati) per volta. Io visualizzero’ il numero ***/n"
+         << "*** dell’indirizzo di memoria e un punto interrogativo (?).  ***/n"
+         << "*** Quindi voi dovrete digitare la parola per quella posizione. ***/n"
+         << "*** Premete il pulsante Fine per interrompere il programma. ***"
+         << endl;
+}
+
+void end()
+{
+    cout << "*** Caricamento del programma completato ***/n"
+         << "*** Inizio dell’esecuzione ***" << endl;
+}
+
+void erroriFatali()
+{
+    cout << "*** Tentativo di dividere per zero ***/n"
+         << "*** Esecuzione di Simpletron terminata a causa di un errore ***" << endl;
+
+    dump();
 }
