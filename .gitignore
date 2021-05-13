@@ -1,4 +1,16 @@
 .vscode
 
+# OS generated files #
+######################
 .DS_Store
+.DS_Store?
+._*
 
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
