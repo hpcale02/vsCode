@@ -49,6 +49,10 @@ void output(const char *const, int, int, bool);
 
 const int SIZE_MEMORY = 100, MAX_WORD = 9999, MIN_WORD = -9999;
 const int SENTINELLA = -99999;
+
+bool erroriFatali = false;
+bool terminata = false;
+
 int main()
 {
     int memory[SIZE_MEMORY] = {0};
@@ -85,7 +89,18 @@ int main()
         operand = instructionRegister % 100;
 
         choose(operationCode, operand, &counter, &accumulator, memory, instructionRegister);
+        if (terminata)
+            break;
+        if (erroriFatali)
+        {
+            cout << "***    verificato un errore fatale!     ***" << endl;
+            cout << "*** Esecuzione di Simpletron terminata! ***" << endl;
+            break;
+        }
     }
+    dump(accumulator, counter, instructionRegister, operationCode, operand, memory);
+
+    return 0;
 }
 
 void choose(const int operationCode, const int operand, int *counterPtr, int *accumulatorPtr, int memory[], const int instructionRegister)
@@ -94,7 +109,12 @@ void choose(const int operationCode, const int operand, int *counterPtr, int *ac
     {
     case 10: //read
         cout << "Inserisci un numero intero:  ";
-        cin >> memory[operand];
+        do
+        {
+            cin >> memory[operand];
+            if (memory[operand] < MIN_WORD || memory[operand] > MAX_WORD)
+                cout << "numero inserito invalido riprova!" << endl;
+        } while (memory[operand] < MIN_WORD || memory[operand] > MAX_WORD);
         break;
     case 11: //write
         cout << "il numero di " << operand << ": ";
@@ -108,15 +128,60 @@ void choose(const int operationCode, const int operand, int *counterPtr, int *ac
         break;
     case 30: //add
         *accumulatorPtr += memory[operand];
+        if (*accumulatorPtr < MIN_WORD)
+        {
+            cout << "\n***      Somma è minore di -9999        ***" << endl;
+            erroriFatali = true;
+        }
+        if (*accumulatorPtr > MAX_WORD)
+        {
+            cout << "\n***      Somma è maggiore di +9999      ***" << endl;
+            erroriFatali = true;
+        }
         break;
     case 31: //subtract
         *accumulatorPtr -= memory[operand];
+        if (*accumulatorPtr < MIN_WORD)
+        {
+            cout << "\n***     Differenza è minore di -9999    ***" << endl;
+            erroriFatali = true;
+        }
+        if (*accumulatorPtr > MAX_WORD)
+        {
+            cout << "\n***    Differenza è maggiore di +9999   ***" << endl;
+            erroriFatali = true;
+        }
         break;
     case 32: //divide
         *accumulatorPtr /= memory[operand];
+        if (*accumulatorPtr < MIN_WORD)
+        {
+            cout << "\n***     Quoziente è minore di -9999     ***" << endl;
+            erroriFatali = true;
+        }
+        if (*accumulatorPtr > MAX_WORD)
+        {
+            cout << "\n***    Quoziente è maggiore di +9999    ***" << endl;
+            erroriFatali = true;
+        }
+        if (memory[operand] == 0)
+        {
+            cout << "\n***     Tentativo di dividere per 0     ***" << endl;
+            erroriFatali = true;
+        }
         break;
     case 33: //multiply
         *accumulatorPtr *= memory[operand];
+        if (*accumulatorPtr < MIN_WORD)
+        {
+            cout << "\n***      Prodotto è minore di -9999     ***" << endl;
+            erroriFatali = true;
+        }
+        if (*accumulatorPtr > MAX_WORD)
+        {
+            cout << "\n***     Prodotto è maggiore di +9999    ***" << endl;
+            erroriFatali = true;
+        }
         break;
     case 40: //branch
         *counterPtr = operand;
@@ -130,11 +195,12 @@ void choose(const int operationCode, const int operand, int *counterPtr, int *ac
             *counterPtr = operand;
         break;
     case 43:
-        cout << "*** Esecuzione di Simpletron tertminata ***" << endl
-             << endl;
-        dump(*accumulatorPtr, *counterPtr, instructionRegister, operationCode, operand, memory);
+        cout << "\n*** Esecuzione di Simpletron tertminata ***" << endl;
+        terminata = true;
         break;
     default:
+        cout << "\n***         Operazione non presente!        ***" << endl;
+        erroriFatali = true;
         break;
     }
 }
