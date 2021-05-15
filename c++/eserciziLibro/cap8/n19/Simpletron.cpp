@@ -40,7 +40,7 @@ void start();
 void end();
 
 //leggere il codice nella memoria
-void writeSML(int[], const int);
+int loadSML(int[], int);
 
 void choose(const int, const int, int *, int *, int[], const int);
 
@@ -49,6 +49,22 @@ void output(const char *const, int, int, bool);
 
 const int SIZE_MEMORY = 100, MAX_WORD = 9999, MIN_WORD = -9999;
 const int SENTINELLA = -99999;
+
+enum Operation
+{
+    READ = 10,
+    WRITE,
+    LOAD = 20,
+    STORE,
+    ADD = 30,
+    SUBTRACT,
+    DIVIDE,
+    MULTIPLY,
+    BRANCH = 40,
+    BRANCHNEG,
+    BRANCHZERO,
+    HALT
+};
 
 bool erroriFatali = false;
 bool terminata = false;
@@ -65,21 +81,11 @@ int main()
     //instructionRegister = memory[ counter ];
     int instructionRegister = 0000; //da memoria a questo
 
-    int k;
-
     start();
 
-    do
-    {
-        writeSML(memory, counter);
-        counter++;
-        k = counter;
-    } while (memory[counter - 1] != SENTINELLA);
-    memory[counter - 1] = 0;
-    cout << endl;
+    int k = loadSML(memory, counter);
 
     end();
-    cout << endl;
 
     for (int counter = 0; counter < k; counter++)
     {
@@ -98,6 +104,7 @@ int main()
             break;
         }
     }
+
     dump(accumulator, counter, instructionRegister, operationCode, operand, memory);
 
     return 0;
@@ -107,7 +114,7 @@ void choose(const int operationCode, const int operand, int *counterPtr, int *ac
 {
     switch (operationCode)
     {
-    case 10: //read
+    case READ: 
         cout << "Inserisci un numero intero:  ";
         do
         {
@@ -116,17 +123,17 @@ void choose(const int operationCode, const int operand, int *counterPtr, int *ac
                 cout << "numero inserito invalido riprova!" << endl;
         } while (memory[operand] < MIN_WORD || memory[operand] > MAX_WORD);
         break;
-    case 11: //write
+    case WRITE: 
         cout << "il numero di " << operand << ": ";
         cout << memory[operand] << endl;
         break;
-    case 20: //load
+    case LOAD: 
         *accumulatorPtr = memory[operand];
         break;
-    case 21: //store
+    case STORE:
         memory[operand] = *accumulatorPtr;
         break;
-    case 30: //add
+    case ADD: 
         *accumulatorPtr += memory[operand];
         if (*accumulatorPtr < MIN_WORD)
         {
@@ -139,7 +146,7 @@ void choose(const int operationCode, const int operand, int *counterPtr, int *ac
             erroriFatali = true;
         }
         break;
-    case 31: //subtract
+    case SUBTRACT: 
         *accumulatorPtr -= memory[operand];
         if (*accumulatorPtr < MIN_WORD)
         {
@@ -152,7 +159,7 @@ void choose(const int operationCode, const int operand, int *counterPtr, int *ac
             erroriFatali = true;
         }
         break;
-    case 32: //divide
+    case DIVIDE:
         *accumulatorPtr /= memory[operand];
         if (*accumulatorPtr < MIN_WORD)
         {
@@ -170,7 +177,7 @@ void choose(const int operationCode, const int operand, int *counterPtr, int *ac
             erroriFatali = true;
         }
         break;
-    case 33: //multiply
+    case MULTIPLY:
         *accumulatorPtr *= memory[operand];
         if (*accumulatorPtr < MIN_WORD)
         {
@@ -183,18 +190,18 @@ void choose(const int operationCode, const int operand, int *counterPtr, int *ac
             erroriFatali = true;
         }
         break;
-    case 40: //branch
+    case BRANCH:
         *counterPtr = operand;
         break;
-    case 41: //branchNeg
+    case BRANCHNEG:
         if (*accumulatorPtr < 0)
             *counterPtr = operand;
         break;
-    case 42: //branchZero
+    case BRANCHZERO: 
         if (*accumulatorPtr == 0)
             *counterPtr = operand;
         break;
-    case 43:
+    case HALT: 
         cout << "\n*** Esecuzione di Simpletron tertminata ***" << endl;
         terminata = true;
         break;
@@ -203,6 +210,22 @@ void choose(const int operationCode, const int operand, int *counterPtr, int *ac
         erroriFatali = true;
         break;
     }
+}
+
+int loadSML(int memory[], int counter)
+{
+    int k;
+    do
+    {
+        cout << setw(2) << setfill('0') << counter << " ? ";
+        cin >> memory[counter];
+        counter++;
+        k = counter;
+    } while (memory[counter - 1] != SENTINELLA);
+    memory[counter - 1] = 0;
+    cout << endl;
+
+    return k;
 }
 
 void dump(const int acc, const int count, const int instructionReg, const int operatioCode, const int operand, const int *const memory)
@@ -251,16 +274,6 @@ void output(const char *const sPtr, int width, int value, bool sign)
         cout << resetiosflags(ios::showpos | ios::internal);
 }
 
-void writeSML(int memory[], const int count)
-{
-    if (count < 10)
-        cout << "0" << count << " ? ";
-    else
-        cout << count << " ? ";
-
-    cin >> memory[count];
-}
-
 void start()
 {
     cout << "***                   Benvenuti in Simpletron!                   ***\n"
@@ -275,5 +288,6 @@ void start()
 void end()
 {
     cout << "*** Caricamento del programma completato ***\n"
-         << "***        Inizio dell’esecuzione        ***" << endl;
+         << "***        Inizio dell’esecuzione        ***" << endl
+         << endl;
 }
