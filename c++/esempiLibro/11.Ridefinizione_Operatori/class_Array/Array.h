@@ -10,8 +10,9 @@ class Array
     friend istream &operator>>(istream &, Array &);
 
 public:
-    Array(int = 10);      // cpstruttore di default
-    Array(const Array &); //costruttore di copia
+    //explicit costruttore di un argomento
+    explicit Array(int = 10); // cpstruttore di default
+    Array(const Array &);     //costruttore di copia
     ~Array();
 
     int getSize() const;
