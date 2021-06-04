@@ -1,15 +1,14 @@
-//classe employee senza ereditarietà
-//hpc 
+//hpc 04.06.2021
 
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
-#include "CommissionEmployee.h"
+#include "BasePlusCommissionEmployee.h"
 
 int main()
 {
-    CommissionEmployee employee("Sue", "Jones", "222-22-2222", 10000, .06);
+    BasePlusCommissionEmployee employee("Bob", "Lewis", "333-33-3333", 5000, .04, 300);
 
     cout << fixed << setprecision(2);
 
@@ -18,10 +17,10 @@ int main()
          << "\nLast name is " << employee.getLastName()
          << "\nSocial security number is " << employee.getSocialSecurityNumber()
          << "\nGross sales is " << employee.getGrossSales()
-         << "\nCommission rate is " << employee.getCommissionRate() << endl;
+         << "\nCommission rate is " << employee.getCommissionRate()
+         << "\nBase salary is " << employee.getBaseSalary() << endl;
 
-    employee.setGrossSales(8000);
-    employee.setCommissionRate(.1);
+    employee.setBaseSalary(1000);
 
     cout << "\nUpdated employee information output by print function:\n" << endl;
     employee.print();
