@@ -1,7 +1,7 @@
 #include <iostream>
 using std::cout;
 
-#include "hourlyEmployee.h"
+#include "HourlyEmployee.h"
 
 HourlyEmployee::HourlyEmployee(const string &first, const string &last, const string &ssn, double hourlyWage, double hoursWorked)
     : Employee(first, last, ssn)

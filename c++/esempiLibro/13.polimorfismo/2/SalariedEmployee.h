@@ -13,7 +13,7 @@ public:
 
     virtual double earnings() const;
     virtual void print() const;
-    
+
 private:
     double weeklySalary;
 };

@@ -23,7 +23,8 @@ double SalariedEmployee::earnings() const
     return getWeeklySalary();
 }
 
-void SalariedEmployee::print() const{
+void SalariedEmployee::print() const
+{
     cout << "salaried employee: ";
     Employee::print();
     cout << "\nweekly salary: " << getWeeklySalary();
